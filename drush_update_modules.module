@@ -1,0 +1,24 @@
+<?php
+
+/**
+ * @file
+ * Hook implementations for drush update modules.
+ */
+
+/**
+ * Implements hook_system_info_alter().
+ */
+function drush_update_modules_system_info_alter(&$info, $file, $type) {
+  if ($type == 'module' && isset($info['update type'])) {
+    $info['hidden'] = TRUE;
+  }
+}
+
+/**
+ * Implements hook_modules_installed().
+ */
+function drush_update_modules_modules_installed($modules) {
+  foreach ($modules as $module) {
+    variable_set('drush_update_modules_' . $module, microtime(TRUE));
+  }
+}
