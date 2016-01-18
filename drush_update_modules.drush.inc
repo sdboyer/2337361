@@ -58,7 +58,7 @@ function drush_drush_update_modules_generate_update_module($name) {
   );
 
   if (empty($info['parent-dir'])) {
-    // Fuck it, if drush can't make it clear how to load these, then hack it in
+    // Ugh...if drush can't make it clear how to load these, then hack it in
     require_once DRUSH_BASE_PATH . '/commands/pm/download.pm.inc';
     $base = _pm_download_destination('module');
     // strip contrib dir, use updates base instead. or just append, if contrib
