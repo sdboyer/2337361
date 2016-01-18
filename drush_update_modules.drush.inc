@@ -19,9 +19,9 @@ function drush_update_modules_drush_command() {
         'title' => array(
           'description' => 'Human-readable title to use for the module. Defaults to same as module machine name.',
         ),
-        //'desc' => array(
-          //'description' => 'Description for the module .info file. Defaults to empty string.',
-        //),
+        'desc' => array(
+          'description' => 'Description for the module .info file. Defaults to empty string.',
+        ),
       ),
       'aliases' => array('gum'),
       'bootstrap' => DRUSH_BOOTSTRAP_DRUPAL_SITE,
@@ -50,7 +50,7 @@ function drush_drush_update_modules_generate_update_module($name) {
   }
 
   $info = array(
-    //'desc' => drush_get_option('desc', $name),
+    'desc' => drush_get_option('desc', ''),
     'title' => drush_get_option('title', $name),
     'type' => drush_get_option('update-type', 'after'),
     'parent-dir' => drush_get_option('parent-dir', ''),
@@ -82,6 +82,7 @@ function drush_drush_update_modules_generate_update_module($name) {
   drush_mkdir($tdir);
   file_put_contents($tdir . "/$name.info", <<<EOT
 name = {$info['title']}
+description = {$info['description']}
 update type = '{$info['type']}'
 core = {$info['core']}
 
